@@ -29,13 +29,16 @@ app.get('/api/timestamp', function (req, res) {
 });
 
 app.get('/api/timestamp/:date', function (req, res) {
-  input = req.params.date;
-  if (input.length < 11) {
-    input = Date.parse(input);
-    if (!input) return res.json({ error: 'Invalid Date' });
+  let input = req.params.date;
+  const reg = /-/;
+  if (reg.test(input)) {
+    input = Date.parse(req.params.date);
   } else {
     input = req.params.date * 1;
   }
+
+  if (!input) return res.json({ error: 'Invalid Date' });
+
   date = new Date(input);
   res.json({
     unix: date.getTime(),
