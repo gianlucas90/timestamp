@@ -32,6 +32,7 @@ app.get('/api/timestamp/:date', function (req, res) {
   input = req.params.date;
   if (input.length < 11) {
     input = Date.parse(input);
+    if (!input) return res.json({ error: 'Invalid Date' });
   } else {
     input = req.params.date * 1;
   }
