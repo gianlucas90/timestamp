@@ -30,7 +30,7 @@ app.get('/api/timestamp', function (req, res) {
 
 app.get('/api/timestamp/:date', function (req, res) {
   let input = req.params.date;
-  const reg = /-/;
+  const reg = /\D/;
   if (reg.test(input)) {
     input = Date.parse(req.params.date);
   } else {
